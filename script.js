@@ -160,11 +160,13 @@ loader.load(MODEL_PATH, function (gltf) {
 }, function (gltf) {
     let loaded_percentage = Math.floor(gltf.loaded / gltf.total * 100);
     console.log(loaded_percentage);
-    // for (let a = 0; a <= loaded_percentage.length; a++) {
-    loaderBar.style.width = ((loaded_percentage / 100) * 400) + "px";
-    // console.log(loaded_percentage[a]);
-    // }
-    // 
+    
+    if (loaded_percentage > 100 ) {
+        loaderBar.style.width = "400px";
+    }
+    else {
+        loaderBar.style.width = ((loaded_percentage / 100) * 400) + "px";
+    }
 
 }, function (error) { console.log(error) });
 
