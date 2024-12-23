@@ -52,7 +52,7 @@ function resizeRendererToDisplaySize(renderer) {
     return needResize;
 }
 
-const MODEL_PATH = '/model.glb'; //the gltf model
+const MODEL_PATH = './model.glb'; //the gltf model
 var loader = new GLTFLoader();
 
 const raycaster = new THREE.Raycaster();
@@ -80,11 +80,6 @@ const mouse = new THREE.Vector2();
 
 //window.addEventListener('click', onMouseClick);
 
-const car_material = new THREE.MeshStandardMaterial({
-    metalness: 0.4,
-    roughness: 0.2
-});
-
 loader.load(MODEL_PATH, function (gltf) {
     model = gltf.scene;
     scene.add(model);
@@ -93,9 +88,9 @@ loader.load(MODEL_PATH, function (gltf) {
         if (o.isMesh) {
             o.castShadow = true;
             o.receiveShadow = true;
-            // console.log(o.name)
         }
 
+        //add all tyre meshes in the 'tyres' array
         if (o.name === "polySurface107_w_TNRRims_87A18NaTireBlur_Material1_0") {
             tyres.push(o);
         }
@@ -108,6 +103,8 @@ loader.load(MODEL_PATH, function (gltf) {
         if (o.name === "polySurface131_w_TNRRims_87A18NaTireBlur_Material1_0") {
             tyres.push(o);
         }
+
+        //add all center cap meshes in the 'center' array
         if (o.name === "polySurface300_w_TNRRims_87A18NaTNR_Rim87A_Material1_0") {
             center.push(o);
         }
@@ -120,6 +117,8 @@ loader.load(MODEL_PATH, function (gltf) {
         if (o.name === "polySurface439_w_TNRRims_87A18NaTNR_Rim87A_Material1_0") {
             center.push(o);
         }
+
+        //add all spoke meshes in the 'spokes' array
         if (o.name === "polySurface318_w_TNRRims_87A18NaTNR_Rim87A_Material1_0") {
             spokes.push(o);
         }
@@ -144,7 +143,6 @@ loader.load(MODEL_PATH, function (gltf) {
         if (o.name === "polySurface459_w_TNRRims_87A18NaTNR_Rim87A_Material1_0") {
             spokes.push(o);
         }
-        // console.log(tyres);
     });
 
     model.scale.set(5000, 5000, 5000);
@@ -205,11 +203,11 @@ function animate() {
     for (let i = 0; i < spokes.length; i++) {
         if (spokes[i]) spokes[i].rotation.x += 0.3;
     }
-center
+    center
     for (let x = 0; x < tyres.length; x++) {
         if (tyres[x]) tyres[x].rotation.x += 0.3;
     }
-    
+
     for (let y = 0; y < center.length; y++) {
         if (center[y]) center[y].rotation.x += 0.3
     }
