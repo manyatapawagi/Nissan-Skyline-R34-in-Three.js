@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <title>Nissan Skyline R34</title>
+    <meta name="viewport"
+        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    </link>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/loaders/GLTFLoader.js"></script> -->
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+          }
+        }
+      </script>
+</head>
+
+<body>
+    <div class="loading" id="js-loader">
+        <div class="loader"></div>
+    </div>
+
+    <div class="wrapper">
+        <canvas id="c"></canvas>
+    </div>
+</body>
+<script type="module" src="script.js"></script>
+
+</html>
