@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 let loaderAnim = document.getElementById('js-loader');
+let loaderBar = document.getElementById('loader')
 
 let center = [];
 let tyres = [];
@@ -82,7 +83,6 @@ const mouse = new THREE.Vector2();
 
 loader.load(MODEL_PATH, function (gltf) {
     model = gltf.scene;
-    scene.add(model);
     model.rotation.x = Math.PI;
     model.traverse(o => {//allows you to use all components in the model
         if (o.isMesh) {
@@ -148,10 +148,25 @@ loader.load(MODEL_PATH, function (gltf) {
     model.scale.set(5000, 5000, 5000);
     model.position.y = -5;
 
-    loaderAnim.remove();
+    
 
-    animate();
-}, undefined, function (error) { console.log(error) });
+    function showScene() {
+        scene.add(model);
+        loaderAnim.remove();
+        animate();
+    }
+    setTimeout(showScene, 8000);
+
+}, function (gltf) {
+    let loaded_percentage = Math.floor(gltf.loaded / gltf.total * 100);
+    console.log(loaded_percentage);
+    // for (let a = 0; a <= loaded_percentage.length; a++) {
+    loaderBar.style.width = ((loaded_percentage / 100) * 400) + "px";
+    // console.log(loaded_percentage[a]);
+    // }
+    // 
+
+}, function (error) { console.log(error) });
 
 let d = 200;
 let dirLight1 = new THREE.DirectionalLight(0xffffff, 5);
@@ -211,6 +226,8 @@ function animate() {
     for (let y = 0; y < center.length; y++) {
         if (center[y]) center[y].rotation.x += 0.3
     }
+
+    console.log(loaderBar.style.width);
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
