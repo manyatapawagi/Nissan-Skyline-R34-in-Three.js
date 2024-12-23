@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-// import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 
 let loaderAnim = document.getElementById('js-loader');
 
@@ -34,12 +33,7 @@ camera.lookAt(10, 50, 10);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.minPolarAngle = Math.PI * 0.55;
 
-let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
-// hemiLight.position.set(0, -50, 0);
-// scene.add(hemiLight);
-
 let ambilight = new THREE.AmbientLight(0xffffff, 4);
-// hemiLight.position.set(0, -50, 0);
 scene.add(ambilight);
 
 //resize canvas dimensions when window is resized
@@ -160,10 +154,6 @@ loader.load(MODEL_PATH, function (gltf) {
 
     animate();
 }, undefined, function (error) { console.log(error) });
-
-// console.log(parts);
-// var wheel_parts = parts.filter(mesh => mesh.includes("Wheel"));
-// console.log(wheel_parts);
 
 let d = 200;
 let dirLight1 = new THREE.DirectionalLight(0xffffff, 5);
