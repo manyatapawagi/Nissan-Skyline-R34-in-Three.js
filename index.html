@@ -7,9 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     </link>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/loaders/GLTFLoader.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script type="importmap">
         {
           "imports": {
@@ -27,6 +25,15 @@
 
     <div class="wrapper">
         <canvas id="c"></canvas>
+    </div>
+
+    <div id="select">
+      <div id="btn">Animations ▼</div>
+      <div id="options">
+        <div class="option">Wheels</div>
+        <div class="option">Door</div>
+        <div class="option">Headlights</div>
+      </div>
     </div>
 </body>
 <script type="module" src="script.js"></script>

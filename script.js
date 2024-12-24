@@ -2,13 +2,22 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-let loaderAnim = document.getElementById('js-loader');
-let loaderBar = document.getElementById('loader')
+let loaderAnim = document.querySelector('#js-loader');
+let loaderBar = document.querySelector('#loader');
+
+let AnimationList = document.querySelector('#select');
 
 let center = [];
 let tyres = [];
 let spokes = [];
 let model;
+
+var wheelBtn = document.querySelectorAll('.option')[0];
+var doorBtn = document.querySelectorAll('.option')[1];
+var headlightBtn = document.querySelectorAll('.option')[2];
+
+console.log(wheelBtn); // Does this log the correct button element?
+
 
 const canvas = document.querySelector('#c');
 const backgroundColor = 0x212121;
@@ -148,11 +157,10 @@ loader.load(MODEL_PATH, function (gltf) {
     model.scale.set(5000, 5000, 5000);
     model.position.y = -5;
 
-    
-
     function showScene() {
         scene.add(model);
         loaderAnim.remove();
+        AnimationList.style.display = "block";
         animate();
     }
     setTimeout(showScene, 8000);
@@ -160,8 +168,8 @@ loader.load(MODEL_PATH, function (gltf) {
 }, function (gltf) {
     let loaded_percentage = Math.floor(gltf.loaded / gltf.total * 100);
     console.log(loaded_percentage);
-    
-    if (loaded_percentage > 100 ) {
+
+    if (loaded_percentage > 100) {
         loaderBar.style.width = "400px";
     }
     else {
@@ -207,6 +215,27 @@ floor.receiveShadow = true;
 floor.position.y = -5;
 scene.add(floor);
 
+function moveWheels() {
+    const allParts = [spokes, tyres, center];
+
+    allParts.forEach(partsArray => {
+        if (partsArray) {
+            partsArray.forEach(part => {
+                if (part) part.rotation.x += 0.3;
+                console.log('damn');
+            });
+        }
+    });
+
+    requestAnimationFrame(moveWheels);
+}
+
+$("#btn").click(function () {
+    $("#options").toggle();
+});
+
+$(wheelBtn).click(moveWheels);
+
 function animate() {
 
     if (resizeRendererToDisplaySize(renderer)) {
@@ -216,20 +245,6 @@ function animate() {
     }
 
     controls.update()
-
-    for (let i = 0; i < spokes.length; i++) {
-        if (spokes[i]) spokes[i].rotation.x += 0.3;
-    }
-    center
-    for (let x = 0; x < tyres.length; x++) {
-        if (tyres[x]) tyres[x].rotation.x += 0.3;
-    }
-
-    for (let y = 0; y < center.length; y++) {
-        if (center[y]) center[y].rotation.x += 0.3
-    }
-
-    console.log(loaderBar.style.width);
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);

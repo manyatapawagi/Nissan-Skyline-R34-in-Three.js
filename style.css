@@ -1,21 +1,18 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  background: #25252B;
-}
-
 body {
   color: white;
   width: 100%;
   height: 100vh;
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  background: #25252b;
 }
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 500;
+  z-index: 50;
 }
 #c {
   position: absolute;
@@ -29,7 +26,7 @@ body {
   border-style: solid;
   border-width: 2px;
   border-color: rgb(255, 255, 255);
-  z-index: 1000;
+  z-index: 80;
   width: 400px;
   height: 40px;
   top: 50%;
@@ -38,28 +35,57 @@ body {
   position: fixed;
 }
 
-#loader{
+#loader {
   width: 0px;
   height: 40px;
   background-color: rgb(125, 0, 0);
   transition: all 10s;
-  /* animation: load 10s infinite ease; */
 }
 
-/* @keyframes load {
+#select {
+  width: fit-content;
+  font-family: monospace;
+  margin: 10px;
+  display: none;
+  transition: 1s all;
+  z-index: 1000;
+  position: relative;
+}
+
+#btn {
+  background: #635b5b;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.option {
+  border-bottom: solid 1px black;
+  padding: 3px;
+  cursor: pointer;
+}
+
+#options {  
+  animation: appear 0.2s;
+  background: grey;
+  position: relative;
+  display: none;
+}
+
+.option:hover {
+  background: rgb(93, 93, 93);
+}
+
+@keyframes appear {
   0% {
-    width: 50px;
+    opacity: 0;
+    top: -50px;
+    transform: scale(0.1);
+    display: none;
   }
-
-  40% {
-    width: 150px;
-  }
-
-  90% {
-    width: 350px;
-  }
-
   100% {
-    width: 400px;
+    opacity: 1;
+    top: 0px;
+    transform: scale(1);
+    display: block;
   }
-} */
+}
