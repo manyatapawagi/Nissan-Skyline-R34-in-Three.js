@@ -1,3 +1,5 @@
+//Model downloaded from https://sketchfab.com/3d-models/2002-nissan-skyline-r34-gt-r-bb7b67852aee412eacc9c97270886a50
+
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
