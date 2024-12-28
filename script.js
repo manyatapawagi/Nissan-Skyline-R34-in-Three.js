@@ -79,24 +79,16 @@ const mouse = new THREE.Vector2();
 // mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
 // Set raycaster from camera and mouse position
-raycaster.setFromCamera(mouse, camera);
+// raycaster.setFromCamera(mouse, camera);
 
 // Check for intersections
 // const intersects = raycaster.intersectObjects(scene.children, true); // 'true' to include child meshes
 // if (intersects.length > 0) {
 //     const selectedPart = intersects[0].object;
-//     console.log(intersects[0].point);
-
-// var pos = new THREE.Vector3();
-// pos.copy( selectedPart.position );
-// selectedPart.localToWorld( pos );
-
-// console.log(pos);
+    // console.log(intersects[0].point); //Get mouse coordinates
 
 // selectedPart.material.color.set(0xff0000); // Highlight part
-// selectedPart.rotation.x = 0.75;
-// console.log(selectedPart.name);
-// console.log(vector);
+// console.log(selectedPart.name); //Get part name
 // }
 // }
 
@@ -166,10 +158,9 @@ loader.load(MODEL_PATH, function (gltf) {
             spokes.push(o);
         }
 
-        //door
+        //add all spoke meshes in the 'headlight' array
         if (o.name === "r1Kit0_Light_Geo_lodA_Kit0_Light_Geo_lodA_Nissan_SkylineGTRR34TNR0_2002LightA_Material_r1Nissan_SkylineGTRR34TNR0_2002LightA_Material1_0") {
             headlight.push(o);
-            // console.log(headlight);
         }
     });
 
@@ -182,7 +173,7 @@ loader.load(MODEL_PATH, function (gltf) {
         AnimationList.style.display = "block";
         animate();
     }
-    setTimeout(showScene, 10); // 8000
+    setTimeout(showScene, 8000);
 
 }, function (gltf) {
     let loaded_percentage = Math.floor(gltf.loaded / gltf.total * 100);
@@ -196,6 +187,7 @@ loader.load(MODEL_PATH, function (gltf) {
 
 }, function (error) { console.log(error) });
 
+//Adding 2 directional lights to through enough light on both sides of the car model
 let d = 200;
 let dirLight1 = new THREE.DirectionalLight(0xffffff, 3);
 dirLight1.position.set(-80, -160, 80);
@@ -219,7 +211,7 @@ const dirLight2 = dirLight1.clone();
 dirLight2.position.set(80, -160, 120);
 scene.add(dirLight2)
 
-//create a floor to cast shadow
+//create a floor to cast shadow of the car model
 let floorGeometry = new THREE.PlaneGeometry(5000, 5000, 10, 1);
 let floorMaterial = new THREE.MeshPhysicalMaterial({
     color: 0x000000,
@@ -294,7 +286,7 @@ function openHeadlight() {
     });
 };
 
-
+//Handling click on buttons
 $("#btn").click(function () {
     $("#options").toggle();
 });
